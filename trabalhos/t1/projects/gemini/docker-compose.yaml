@@ -1,0 +1,30 @@
+services:
+  gemini-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gemini-app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - gemini-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: gemini-nginx
+    restart: unless-stopped
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - gemini-app
+    networks:
+      - gemini-network
+
+networks:
+  gemini-network:
+    driver: bridge

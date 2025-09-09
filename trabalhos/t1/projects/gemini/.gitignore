@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# SSL certificates and keys (security)
+nginx/ssl/*.crt
+nginx/ssl/*.key
+nginx/ssl/*.pfx
+nginx/ssl/*.p12
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
